@@ -1,0 +1,150 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ToDo List</title>
+
+
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+
+        }
+
+        .container {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            margin-top: 130px;
+            
+        }
+        .inner-container {
+            padding: 70px;
+            
+            background-color: rgb(172, 246, 185); 
+            border: 1px solid black;
+            border-radius: 4px;
+            display: flex;
+            flex-direction: column;
+
+        }
+        #btn {
+            margin: 10px;
+            padding: 11px;
+            border: 0.5px solid black;
+            background-color: rgb(81, 253, 253);
+            border-radius: 4px;
+            cursor: pointer;
+            font-family: Verdana, Geneva, Tahoma, sans-serif;
+            font-weight: 550;
+            font-size: 15px;
+
+        }
+
+        p {
+            font-family: Verdana, Geneva, Tahoma, sans-serif;
+            font-size: 20px;
+
+        }
+
+        input {
+            padding: 10px;
+            border: 0.5px solid black;
+            border-radius: 4px;
+            text-align: center;
+            font-family: Cambria, Cochin, Georgia, Times, 'Times New Roman', serif;
+            font-size: 18px;
+
+        }
+        
+
+    </style>
+
+</head>
+<body>
+    
+
+    <div class="container">
+        <h2>ToDo List</h2>
+        <div class="inner-container">
+            <input type="text" placeholder="Task name goes here...." name="task" id="task-inp">
+            <button id="btn">Add Task </button>
+        </div>
+        <div class="res-container">
+            <div class="result">
+
+            </div>
+        </div>
+    </div>
+
+    <script>
+        let taskInput = document.getElementById('task-inp');
+        let button = document.querySelector('#btn');
+        let result = document.querySelector('.result');
+        
+        button.addEventListener('click', () => {
+            
+            if (taskInput.value.length == 0) {
+                alert('Please enter a task!!!');
+            }
+            else {
+                
+                let task = document.createElement('div');
+                task.id = 'task-div';
+                const colors = ['red', 'pink', 'green', 'orange', 'yellow'];
+                
+                task.style.background = colors[ Math.floor(Math.random() * (colors.length)) ];
+                task.style.margin = '20px';
+                task.style.display = 'flex';
+                task.style.justifyContent = 'space-between';
+                task.style.border = '1px solid black';
+                task.style.borderRadius = '5px';
+
+                if (task.style.background == 'red' || task.style.background == 'green') {
+                    task.style.color = "white";
+                }
+
+                let taskContent = document.createElement('p');
+                taskContent.id = 'task-content';
+                taskContent.innerText = taskInput.value;
+                taskContent.style.margin = '10px';
+                taskContent.style.padding = '10px';
+                task.appendChild(taskContent);
+
+
+                let deleteBtn = document.createElement('button');
+                deleteBtn.id = 'del-btn';
+                deleteBtn.innerText = 'delete';
+                deleteBtn.style.padding = '8px';
+                deleteBtn.style.margin = '12px 4px';
+                deleteBtn.style.textAlign = 'center';
+                deleteBtn.style.border = '0.5px solid black';
+                deleteBtn.style.borderRadius = '4px';
+                deleteBtn.style.cursor = 'pointer';
+                deleteBtn.style.fontWeight = 300;
+                deleteBtn.style.fontSize = '13px';
+
+                task.appendChild(deleteBtn);
+                
+                result.appendChild(task);
+                deleteBtn.addEventListener('click', () => {
+                    deleteBtn.parentNode.remove();
+                });
+
+                taskInput.value = '';
+            }
+            
+
+        });
+
+        
+        
+        
+
+
+    </script>
+
+</body>
+</html>
